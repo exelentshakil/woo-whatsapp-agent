@@ -137,7 +137,17 @@ export default function HomePage() {
           </section>
 
           {/* Section 3: Stripe 3-Column Feature Cards */}
-          <StripeFeatureGrid onSelectCard={(href) => handleNavigate(href.replace('#', ''))} />
+          <StripeFeatureGrid
+            onOpenGovernance={() => setGovernanceDrawerOpen(true)}
+            onOpenPipeline={() => handleNavigate('pipeline')}
+            onOpenLogs={() => setLogsDrawerOpen(true)}
+            onSelectCard={(action) => {
+              if (action === 'governance') setGovernanceDrawerOpen(true);
+              else if (action === 'logs') setLogsDrawerOpen(true);
+              else if (action === 'pipeline') handleNavigate('pipeline');
+              else handleNavigate(action.replace('#', ''));
+            }}
+          />
 
           {/* Section 4: Entity Data Grid & Slide-out Inspection Sheet */}
           <section id="records" className="scroll-mt-20">
